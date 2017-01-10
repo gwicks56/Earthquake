@@ -32,8 +32,8 @@ class Earthquake {
         this.dataTime = dataTime;
     }
 
-    double getDepth() {
-        return depth;
+    String getDepth() {
+        return Double.toString(depth);
     }
 
     void setDepth(double depth) {
@@ -48,24 +48,28 @@ class Earthquake {
         this.eqid = eqid;
     }
 
-    double getLatitude() {
-        return latitude;
+    String getLatitude() {
+        return Double.toString(latitude);
     }
 
     void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    double getLongitude() {
-        return longitude;
+    String getLongitude() {
+        return Double.toString(longitude);
     }
 
     void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
-    double getMagitude() {
+    Double getMagitude() {
         return magitude;
+    }
+
+    String getMagitudeAsString(){
+        return Double.toString(magitude);
     }
 
     void setMagitude(double magitude) {
@@ -77,14 +81,14 @@ class Earthquake {
 
     @Override
     public String toString() {
-        return "Earthquake{" +
-                "dataTime='" + dataTime + '\'' +
-                ", depth=" + depth +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
+        return
+                "Time and Date: " + dataTime + '\n' +
+                "Depth: " + depth + '\n' +
+                "Longitude: " + longitude + '\n' +
+                "Latitude: " + latitude + '\n' +
 
-                ", eqid='" + eqid + '\'' +
-                ", magitude=" + magitude +
-                '}';
+                "Eqid: " + eqid + '\n' +
+                "Magitude: " + magitude
+                ;
     }
 }
