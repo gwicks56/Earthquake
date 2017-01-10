@@ -3,6 +3,7 @@ package gwicks.com.ebayproject;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,12 @@ class EarthquakeAdaptor extends ArrayAdapter {
 
     @Override
     public int getCount() {
+        Log.d(TAG, "getCount: returning : " + earthquakes.size());
         return earthquakes.size();
+    }
+
+    @Override
+    public Earthquake getItem(int position){
+        return earthquakes.get(position);
     }
 }

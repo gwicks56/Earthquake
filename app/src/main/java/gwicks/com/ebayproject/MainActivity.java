@@ -4,7 +4,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,11 +25,34 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         listEarthquakes = (ListView) findViewById(R.id.json_list_view);
         DownloadData downloadData = new DownloadData();
         downloadData.execute("http://api.geonames.org/earthquakesJSON?formatted=true&north=44.1&south=-9.9&east=-22.4&west=55.2&username=mkoppelman");
+        Log.d(TAG, "onCreate: Count is: " + listEarthquakes.getCount());
+
+
+
+        listEarthquakes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long iD) {
+                //EarthquakeAdaptor adaptor = (EarthquakeAdaptor)parent.getAdapter();
+                //Earthquake earthquake = (Earthquake) adaptor.getItem(position);
+                int count = listEarthquakes.getCount();
+                //String string = (String)parent.getItemAtPosition(position);
+                Toast.makeText(MainActivity.this, "hello posiion is: " + position, Toast.LENGTH_LONG).show();
+                //String item = parent.getItemAtPosition(position).toString();
+                //Toast.makeText(MainActivity.this, listEarthquakes.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Count is: " + count, Toast.LENGTH_LONG);
+            }
+        });
+
+
+
     }
+
 
     private class DownloadData extends AsyncTask<String, Void, String>{
         private static final String TAG = "DownloadData";
@@ -89,6 +115,12 @@ public class MainActivity extends AppCompatActivity {
 
             EarthquakeAdaptor earthquakeAdaptor = new EarthquakeAdaptor(MainActivity.this, R.layout.list_quake, parseEarthquakeData.getEarthquakes());
             listEarthquakes.setAdapter(earthquakeAdaptor);
+            Log.d(TAG, "onPostExecute: Count is: " + listEarthquakes.getCount());
+
+
+
+
+
 
 
 
