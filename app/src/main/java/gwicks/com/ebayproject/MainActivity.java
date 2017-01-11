@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,10 +16,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * Created by gwicks on 9/01/2017.
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private ListView listEarthquakes;
     private static final String TAG = "MainActivity";
+    public static final String EARTHQUAKE_URL = "http://api.geonames.org/earthquakesJSON?formatted=true&north=44.1&south=-9.9&east=-22.4&west=55.2&username=mkoppelman"; // Given URL to parse
 
 
     @Override
@@ -30,46 +34,40 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         listEarthquakes = (ListView) findViewById(R.id.json_list_view);
         DownloadData downloadData = new DownloadData();
-        downloadData.execute("http://api.geonames.org/earthquakesJSON?formatted=true&north=44.1&south=-9.9&east=-22.4&west=55.2&username=mkoppelman");
+        downloadData.execute(EARTHQUAKE_URL);
         Log.d(TAG, "onCreate: Count is: " + listEarthquakes.getCount());
 
 
-
+        // OnClickListener for the ListView
+        // Clicking on an item in the ListView will load Google Maps, and show the epicenter of the earthquake
         listEarthquakes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long iD) {
+
                 EarthquakeAdaptor adaptor = (EarthquakeAdaptor)parent.getAdapter();
                 Earthquake earthquake = adaptor.getItem(position);
-                int count = listEarthquakes.getCount();
-                //String string = (String)parent.getItemAtPosition(position);
-                Toast.makeText(MainActivity.this, "hello posiion is: " + position, Toast.LENGTH_LONG).show();
 
                 Intent mapIntent = new Intent(getApplicationContext(), MapActivity.class);
-//                startActivity(mapIntent);
-                //Bundle b = new Bundle();
                 double latitude = earthquake.getLatAsDouble();
                 double longitude = earthquake.getLongAsDouble();
                 double magitude = earthquake.getMagnitude();
                 String eqid = earthquake.getEqid();
 
+                // add extra data to the intent, lat and long are used for position, id and mag are currently unused, but could be useful if marker is made clickable
                 mapIntent.putExtra("lat", latitude);
                 mapIntent.putExtra("long", longitude);
                 mapIntent.putExtra("id", eqid );
                 mapIntent.putExtra("mag", magitude);
 
-                //Uri latLong = Uri.parse("geo: 37.774, -122.419");
-                //Uri latLong2 = Uri.parse("geo: " + latitude + " " + longitude);
-                //Intent mapIntent = new Intent(Intent.ACTION_VIEW, latLong2);
                 startActivity(mapIntent);
 
             }
         });
 
-
-
     }
 
+    // AsyncTask to download the JSON data from the internet off the UI Thread
 
     private class DownloadData extends AsyncTask<String, Void, String>{
         private static final String TAG = "DownloadData";
@@ -117,33 +115,24 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-            //mDownloadStatus = DownloadStatus.FAILED_OR_EMPTY;
+
             return null;
         }
+
+        // After download parse the JSON data and send it to the custom array adaptor
+        // NOTE: JSON parsing is done on the UI thread, for large datasets, this should be moved to another AsyncTask
 
         @Override
         protected void onPostExecute(String strings) {
             Log.d(TAG, "onPostExecute: Paramater = " + strings);
             ParseEarthquakeData parseEarthquakeData = new ParseEarthquakeData();
             parseEarthquakeData.onDownloadComplete(strings);
-
-//            ArrayAdapter<Earthquake> arrayAdapter = new ArrayAdapter<Earthquake>(MainActivity.this, R.layout.list_item, parseEarthquakeData.getEarthquakes());
-//            listEarthquakes.setAdapter(arrayAdapter);
-
             EarthquakeAdaptor earthquakeAdaptor = new EarthquakeAdaptor(MainActivity.this, R.layout.list_quake, parseEarthquakeData.getEarthquakes());
             listEarthquakes.setAdapter(earthquakeAdaptor);
             Log.d(TAG, "onPostExecute: Count is: " + listEarthquakes.getCount());
 
 
-
-
-
-
-
-
         }
     }
-
-
 
 }

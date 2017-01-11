@@ -15,12 +15,15 @@ import java.util.List;
  * Created by gwicks on 9/01/2017.
  */
 
-//Custom array adaptor for the listView
+/*
+    Custom array adaptor for the listView
+    Uses ViewHolder inner class to speed up scrolling
+*/
 
 class EarthquakeAdaptor extends ArrayAdapter {
 
-    // Class to hold each earthquake to prevent repeatedly calling findViewByID
-    static class ViewHolder{
+    // Class to hold each earthquake to prevent listView repeatedly calling findViewByID
+    private static class ViewHolder {
 
         TextView tvEqid;
         TextView tvTime;
@@ -48,42 +51,47 @@ class EarthquakeAdaptor extends ArrayAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        ViewHolder viewHolder;
+        ViewHolder viewHolder; // ViewHolder to store each earthquake to speed up scrolling
 
-        if(convertView == null){
+        if (convertView == null) {
             convertView = layoutInflater.inflate(layoutResource, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.tvDepth = (TextView) convertView.findViewById(R.id.idDepth);
             viewHolder.tvEqid = (TextView) convertView.findViewById(R.id.idEqid);
-            viewHolder.tvLat =  (TextView) convertView.findViewById(R.id.idLat);
+            viewHolder.tvLat = (TextView) convertView.findViewById(R.id.idLat);
             viewHolder.tvLong = (TextView) convertView.findViewById(R.id.idLong);
             viewHolder.tvTime = (TextView) convertView.findViewById(R.id.idDateAndTime);
             viewHolder.tvMag = (TextView) convertView.findViewById(R.id.idMagitude);
             convertView.setTag(viewHolder);
 
-        }else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Earthquake currentApp = earthquakes.get(position);
 
-        viewHolder.tvEqid.setText("ID: "  + currentApp.getEqid());
-        viewHolder.tvLat.setText( currentApp.getLatitude());
+        viewHolder.tvEqid.setText("ID: " + currentApp.getEqid());
+        viewHolder.tvLat.setText(currentApp.getLatitude());
         viewHolder.tvTime.setText(currentApp.getDataTime());
-        viewHolder.tvLong.setText( currentApp.getLongitude());
+        viewHolder.tvLong.setText(currentApp.getLongitude());
         viewHolder.tvMag.setText(currentApp.getMagitudeAsString());
         viewHolder.tvDepth.setText(currentApp.getDepth());
 
+        /* The magnitude of earthquake is color coded:
+            GREEN: less than 4
+            YELLOW: between 4 and 6
+            ORANGE: between 6 and 8
+            RED: above 8
+        */
+
         double color = currentApp.getMagnitude();
-        if(color <= 4){
+        if (color <= 4) {
             viewHolder.tvMag.setTextColor(Color.GREEN);
-        }
-        else if(color > 4 && color <=6){
+        } else if (color > 4 && color <= 6) {
             viewHolder.tvMag.setTextColor(Color.YELLOW);
-        }
-        else if(color > 6 && color <=8) {
-            viewHolder.tvMag.setTextColor(Color.rgb(255,201,102));
-        }else{
+        } else if (color > 6 && color <= 8) {
+            viewHolder.tvMag.setTextColor(Color.rgb(255, 201, 102));
+        } else {
             viewHolder.tvMag.setTextColor(Color.RED);
         }
 
@@ -96,7 +104,7 @@ class EarthquakeAdaptor extends ArrayAdapter {
     }
 
     @Override
-    public Earthquake getItem(int position){
+    public Earthquake getItem(int position) {
         return earthquakes.get(position);
     }
 }

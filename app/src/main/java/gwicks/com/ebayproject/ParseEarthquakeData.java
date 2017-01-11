@@ -12,6 +12,9 @@ import java.util.ArrayList;
  * Created by gwicks on 9/01/2017.
  */
 
+// Class to parse raw JSON downloaded by the AsyncTask in MainActivity,
+// and store data from each earchquake in a list of earthquake objects
+
 class ParseEarthquakeData {
 
     private static final String TAG = "ParseEarthquakeData";
@@ -54,15 +57,8 @@ class ParseEarthquakeData {
             Log.e(TAG, "onDownloadComplete: error processing json data: " + e.getMessage());
 
 
-//        if(mCallBack != null){
-//            //inform caller proccessing is done
-//
-//            mCallBack.onDataAvailable(earthquakeList, status);
-//
-
         }
 
-        //Log.d(TAG, "onDownloadComplete: ends");
     }
 }
 

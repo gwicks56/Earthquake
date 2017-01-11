@@ -4,6 +4,9 @@ package gwicks.com.ebayproject;
  * Created by gwicks on 9/01/2017.
  */
 
+// Earthquake object holding all the data that is parsed from the given URL
+// Constructor sets all values on creation
+
 class Earthquake {
 
     private String dataTime;
@@ -23,10 +26,11 @@ class Earthquake {
         this.magnitude = magnitude;
     }
 
+    // Getters - No setters needed as Constructor sets everything
+
     String getDataTime() {
         return dataTime;
     }
-
 
 
     String getDepth() {
@@ -34,22 +38,20 @@ class Earthquake {
     }
 
 
-
     String getEqid() {
         return eqid;
     }
-
 
 
     String getLatitude() {
         return Double.toString(latitude);
     }
 
-    double getLatAsDouble(){
+    double getLatAsDouble() {
         return latitude;
     }
 
-    double getLongAsDouble(){
+    double getLongAsDouble() {
         return longitude;
     }
 
@@ -62,7 +64,7 @@ class Earthquake {
         return magnitude;
     }
 
-    String getMagitudeAsString(){
+    String getMagitudeAsString() {
         return Double.toString(magnitude);
     }
 
@@ -71,12 +73,12 @@ class Earthquake {
     public String toString() {
         return
                 "Time and Date: " + dataTime + '\n' +
-                "Depth: " + depth + '\n' +
-                "Longitude: " + longitude + '\n' +
-                "Latitude: " + latitude + '\n' +
+                        "Depth: " + depth + '\n' +
+                        "Longitude: " + longitude + '\n' +
+                        "Latitude: " + latitude + '\n' +
 
-                "Eqid: " + eqid + '\n' +
-                "Magitude: " + magnitude
+                        "Eqid: " + eqid + '\n' +
+                        "Magitude: " + magnitude
                 ;
     }
 }

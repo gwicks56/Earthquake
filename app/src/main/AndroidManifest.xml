@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="gwicks.com.ebayproject">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,14 +24,15 @@
             android:parentActivityName=".MapActivity">
 
             <intent-filter>
-                <action android:name=".MapActivity"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name=".MapActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
         </activity>
 
-        <meta-data  android:name="com.google.android.geo.API_KEY"
-                    android:value="AIzaSyDhuvfQbO3xCv_syIEd-9ryewcee8hdHAw"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDhuvfQbO3xCv_syIEd-9ryewcee8hdHAw" />
     </application>
 
 </manifest>
