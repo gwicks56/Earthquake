@@ -1,7 +1,6 @@
 package gwicks.com.ebayproject;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -24,7 +23,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
     double latitude;
     double longitude;
     LatLng position;
@@ -54,15 +52,12 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Intent i = getIntent();
-
-
     }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        GoogleMap mMap = googleMap;
         mMap.moveCamera(CameraUpdateFactory.newLatLng(position));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(5));
 

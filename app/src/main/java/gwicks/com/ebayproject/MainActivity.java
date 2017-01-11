@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         listEarthquakes = (ListView) findViewById(R.id.json_list_view);
+
+        // Start the AsyncTask to download the raw JSON from URL
         DownloadData downloadData = new DownloadData();
         downloadData.execute(EARTHQUAKE_URL);
         Log.d(TAG, "onCreate: Count is: " + listEarthquakes.getCount());

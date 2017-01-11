@@ -16,12 +16,11 @@ class Earthquake {
     private String eqid;
     private double magnitude;
 
-    public Earthquake(String dataTime, double depth, double longitude, double latitude, String eqid, double magnitude) {
+    Earthquake(String dataTime, double depth, double longitude, double latitude, String eqid, double magnitude) {
         this.dataTime = dataTime;
         this.depth = depth;
         this.longitude = longitude;
         this.latitude = latitude;
-
         this.eqid = eqid;
         this.magnitude = magnitude;
     }

@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 /*
-    Custom array adaptor for the listView
+    Custom adaptor for the listView
     Uses ViewHolder inner class to speed up scrolling
 */
 
@@ -68,14 +68,15 @@ class EarthquakeAdaptor extends ArrayAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Earthquake currentApp = earthquakes.get(position);
+        Earthquake current;
+        current = earthquakes.get(position);
 
-        viewHolder.tvEqid.setText("ID: " + currentApp.getEqid());
-        viewHolder.tvLat.setText(currentApp.getLatitude());
-        viewHolder.tvTime.setText(currentApp.getDataTime());
-        viewHolder.tvLong.setText(currentApp.getLongitude());
-        viewHolder.tvMag.setText(currentApp.getMagitudeAsString());
-        viewHolder.tvDepth.setText(currentApp.getDepth());
+        viewHolder.tvEqid.setText("ID: " + current.getEqid());
+        viewHolder.tvLat.setText(current.getLatitude());
+        viewHolder.tvTime.setText(current.getDataTime());
+        viewHolder.tvLong.setText(current.getLongitude());
+        viewHolder.tvMag.setText(current.getMagitudeAsString());
+        viewHolder.tvDepth.setText(current.getDepth());
 
         /* The magnitude of earthquake is color coded:
             GREEN: less than 4
@@ -84,7 +85,7 @@ class EarthquakeAdaptor extends ArrayAdapter {
             RED: above 8
         */
 
-        double color = currentApp.getMagnitude();
+        double color = current.getMagnitude();
         if (color <= 4) {
             viewHolder.tvMag.setTextColor(Color.GREEN);
         } else if (color > 4 && color <= 6) {

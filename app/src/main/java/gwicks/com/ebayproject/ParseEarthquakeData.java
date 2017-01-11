@@ -22,7 +22,7 @@ class ParseEarthquakeData {
     private ArrayList<Earthquake> earthquakeList;
 
     ParseEarthquakeData() {
-        this.earthquakeList = new ArrayList<Earthquake>();
+        this.earthquakeList = new ArrayList<>();
     }
 
     ArrayList<Earthquake> getEarthquakes() {
