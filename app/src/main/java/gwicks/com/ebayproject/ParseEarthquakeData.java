@@ -18,15 +18,15 @@ class ParseEarthquakeData {
 
     private ArrayList<Earthquake> earthquakeList;
 
-    public ParseEarthquakeData() {
+    ParseEarthquakeData() {
         this.earthquakeList = new ArrayList<Earthquake>();
     }
 
-    public ArrayList<Earthquake> getEarthquakes() {
+    ArrayList<Earthquake> getEarthquakes() {
         return earthquakeList;
     }
 
-    public void onDownloadComplete(String data) {
+    void onDownloadComplete(String data) {
         Log.d(TAG, "onDownloadComplete: starts Status: ");
 
         earthquakeList = new ArrayList<>();

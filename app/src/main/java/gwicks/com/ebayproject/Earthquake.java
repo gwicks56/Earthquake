@@ -10,73 +10,61 @@ class Earthquake {
     private double depth;
     private double longitude;
     private double latitude;
-    //private String source;
     private String eqid;
-    private double magitude;
+    private double magnitude;
 
-    public Earthquake(String dataTime, double depth, double longitude, double latitude, String eqid, double magitude) {
+    public Earthquake(String dataTime, double depth, double longitude, double latitude, String eqid, double magnitude) {
         this.dataTime = dataTime;
         this.depth = depth;
         this.longitude = longitude;
         this.latitude = latitude;
 
         this.eqid = eqid;
-        this.magitude = magitude;
+        this.magnitude = magnitude;
     }
 
     String getDataTime() {
         return dataTime;
     }
 
-    void setDataTime(String dataTime) {
-        this.dataTime = dataTime;
-    }
+
 
     String getDepth() {
         return Double.toString(depth);
     }
 
-    void setDepth(double depth) {
-        this.depth = depth;
-    }
+
 
     String getEqid() {
         return eqid;
     }
 
-    void setEqid(String eqid) {
-        this.eqid = eqid;
-    }
+
 
     String getLatitude() {
         return Double.toString(latitude);
     }
 
-    void setLatitude(double latitude) {
-        this.latitude = latitude;
+    double getLatAsDouble(){
+        return latitude;
     }
+
+    double getLongAsDouble(){
+        return longitude;
+    }
+
 
     String getLongitude() {
         return Double.toString(longitude);
     }
 
-    void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    Double getMagitude() {
-        return magitude;
+    double getMagnitude() {
+        return magnitude;
     }
 
     String getMagitudeAsString(){
-        return Double.toString(magitude);
+        return Double.toString(magnitude);
     }
-
-    void setMagitude(double magitude) {
-        this.magitude = magitude;
-    }
-
-
 
 
     @Override
@@ -88,7 +76,7 @@ class Earthquake {
                 "Latitude: " + latitude + '\n' +
 
                 "Eqid: " + eqid + '\n' +
-                "Magitude: " + magitude
+                "Magitude: " + magnitude
                 ;
     }
 }

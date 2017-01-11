@@ -18,6 +18,18 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".MapActivity"
+            android:label="Map"
+            android:parentActivityName=".MapActivity">
+
+            <intent-filter>
+                <action android:name=".MapActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
+
         <meta-data  android:name="com.google.android.geo.API_KEY"
                     android:value="AIzaSyDhuvfQbO3xCv_syIEd-9ryewcee8hdHAw"/>
     </application>

@@ -1,5 +1,6 @@
 package gwicks.com.ebayproject;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,14 +39,30 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long iD) {
-                //EarthquakeAdaptor adaptor = (EarthquakeAdaptor)parent.getAdapter();
-                //Earthquake earthquake = (Earthquake) adaptor.getItem(position);
+                EarthquakeAdaptor adaptor = (EarthquakeAdaptor)parent.getAdapter();
+                Earthquake earthquake = adaptor.getItem(position);
                 int count = listEarthquakes.getCount();
                 //String string = (String)parent.getItemAtPosition(position);
                 Toast.makeText(MainActivity.this, "hello posiion is: " + position, Toast.LENGTH_LONG).show();
-                //String item = parent.getItemAtPosition(position).toString();
-                //Toast.makeText(MainActivity.this, listEarthquakes.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
-                Toast.makeText(MainActivity.this, "Count is: " + count, Toast.LENGTH_LONG);
+
+                Intent mapIntent = new Intent(getApplicationContext(), MapActivity.class);
+//                startActivity(mapIntent);
+                //Bundle b = new Bundle();
+                double latitude = earthquake.getLatAsDouble();
+                double longitude = earthquake.getLongAsDouble();
+                double magitude = earthquake.getMagnitude();
+                String eqid = earthquake.getEqid();
+
+                mapIntent.putExtra("lat", latitude);
+                mapIntent.putExtra("long", longitude);
+                mapIntent.putExtra("id", eqid );
+                mapIntent.putExtra("mag", magitude);
+
+                //Uri latLong = Uri.parse("geo: 37.774, -122.419");
+                //Uri latLong2 = Uri.parse("geo: " + latitude + " " + longitude);
+                //Intent mapIntent = new Intent(Intent.ACTION_VIEW, latLong2);
+                startActivity(mapIntent);
+
             }
         });
 
